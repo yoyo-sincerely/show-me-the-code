@@ -7,13 +7,19 @@
 
 import re,sys,os
 path = os.path.split(os.path.realpath(__file__))[0]
+# [^A-Za-z-\']匹配所有非A-Za-z-\'的字符串 (?<![A-Za-z])[-\']) 匹配前面不是[A-Za-z]的部分 (?![A-Za-z])匹配后面跟的不是[A-Za-z]的部分
 Fliter = re.compile("[^A-Za-z-\']|((?<![A-Za-z])[-\'])|([-\'](?![A-Za-z]))")
+# print(type(Fliter))
+
+# \s匹配任意的空白符
 Divider = re.compile("\s")
 File = open(path+"\input.txt").read()
+# 
 Data =  Divider.split(Fliter.sub(" ",File))
 Dict = {}
 for i in Data:
 	j = i.lower()
+	# print(j)
 	try:
 		Dict[j]+=1
 	except KeyError:
